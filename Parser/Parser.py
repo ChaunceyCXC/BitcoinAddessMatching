@@ -1,3 +1,5 @@
+//Parse full Bitcoin transaction information to json file 
+
 import os
 import json
 from blockchain_parser.blockchain import Blockchain
