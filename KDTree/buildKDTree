@@ -1,0 +1,116 @@
+import os
+import json
+import statistics
+import datetime
+
+class Node(object):
+    def __init__(self):
+        self.father = None
+        self.left = None
+        self.right = None
+        self.split = None
+
+
+print(datetime.datetime.now())
+rootNode=Node()
+rootpath = "/home/chauncey/fullledgerKD"
+
+
+def writeToJSONFile(filePath, data):
+    with open(filePath, 'a') as fp:
+        json.dump(data, fp)
+        fp.write("\n")
+def divideByDate(rootpath,node,layers):
+  layers=layers+1
+  files=sorted(os.listdir(rootpath))
+  total=0;
+  for file in files:
+     count=0
+     fp=open(rootpath+"/"+file,"r")
+     for lin in fp:
+          count += 1
+     total=total+count
+  half=int(total/2)
+  leftPath=rootpath+"/"+"Left"
+  rightPath=rootpath+"/"+"Right"
+  os.mkdir(leftPath)
+  os.mkdir(rightPath)
+  counts = 0
+  for file in files:
+     fp=open(rootpath+"/"+file,"r")
+     for line in fp:
+          tx = json.loads(line)
+          date = tx["date"]
+          counts += 1
+          if counts<half:
+              writeToJSONFile(leftPath+"/"+date,tx)
+          elif counts==half:
+              node.split=date[:-5]
+              writeToJSONFile(leftPath+"/"+date, tx)
+          else:
+              writeToJSONFile(rightPath+"/"+date, tx)
+
+  for file in files:
+      os.remove(rootpath+"/"+file)
+  if layers<21:
+      leftnode=Node()
+      rightnode=Node()
+      node.left=leftnode
+      node.right=rightnode
+      devideByValue(leftPath,leftnode,layers)
+      devideByValue(rightPath,rightnode,layers)
+
+
+def devideByValue(rootpath,node,layers):
+    layers = layers + 1
+    files = sorted(os.listdir(rootpath))
+    ls=[]
+    for file in files:
+        fp = open(rootpath + "/" + file, "r")
+        for line in fp:
+             tx=json.loads(line)
+             ls.append(tx["value"])
+    median=statistics.median(ls)
+    node.split=median
+    leftPath = rootpath + "/" + "Left"
+    rightPath = rootpath + "/" + "Right"
+    os.mkdir(leftPath)
+    os.mkdir(rightPath)
+    for file in files:
+        fp = open(rootpath + "/" + file, "r")
+        for line in fp:
+            tx = json.loads(line)
+            date = tx["date"]
+            value=tx["value"]
+            if value <= median:
+                writeToJSONFile(leftPath + "/" + date, tx)
+            else:
+                writeToJSONFile(rightPath + "/" + date, tx)
+    for file in files:
+        os.remove(rootpath + "/" + file)
+    if layers<10:
+        leftnode = Node()
+        rightnode = Node()
+        node.left = leftnode
+        node.right = rightnode
+        divideByDate(leftPath, leftnode,layers)
+        divideByDate(rightPath, rightnode,layers)
+
+def printPreorder(root):
+    if root:
+        splitls.append(root.split)
+
+        printPreorder(root.left)
+
+        printPreorder(root.right)
+
+divideByDate(rootpath,rootNode,0)
+splitls=[]
+printPreorder(rootNode)
+for i in splitls:
+    dic={}
+    dic["split"]=i
+    writeToJSONFile(rootpath+"/"+"0split.json", dic)
+#print(splitls)
+
+print(datetime.datetime.now())
