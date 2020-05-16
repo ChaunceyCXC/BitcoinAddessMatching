@@ -1,0 +1,36 @@
+import os.path
+import json
+
+
+
+def writeToJSONFile(filePath, data):
+    with open(filePath, 'a') as fp:
+        json.dump(data, fp)
+        fp.write("\n")
+
+
+
+pathledger="/media/chauncey/Elements/bitcoinTx/2018/"
+output="/home/chauncey/fullledger"
+
+
+files=os.listdir(pathledger)
+n=0
+for file in files:
+    block = open(pathledger + "/" + file, 'r')
+    date=file[0:10]
+    for line in block:
+         tx=json.loads(line)
+         for key in tx:
+            receivers=tx[key]["outputs"]
+            outputvalue=0
+            for receiver in receivers:
+                bitcoinvalue=receiver["value"]/100000000
+                dic={}
+                dic["address"]=receiver["address"]
+                dic["date"]=date
+                dic["value"]=bitcoinvalue
+                filepath = output + "/"+file
+                writeToJSONFile(filepath,dic)
+                n=n+1
+print(n)
