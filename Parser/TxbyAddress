@@ -11,7 +11,7 @@ def writeToJSONFile(filePath, data):
 
 pathledger="/home/chauncey/filterledger2018"
 output="/home/chauncey/filteraddresstx"
-addressfile="/home/chauncey/Result/addressDic1.json"
+addressfile="/home/chauncey/Result/addressDic.json"
 addresslist=[]
 fouput=open(addressfile,"r")
 for line in fouput:
