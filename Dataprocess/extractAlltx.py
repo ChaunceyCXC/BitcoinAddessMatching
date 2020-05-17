@@ -1,0 +1,40 @@
+import os.path
+import json
+
+
+
+def writeToJSONFile(filePath, data):
+    with open(filePath, 'a') as fp:
+        json.dump(data, fp)
+        fp.write("\n")
+
+
+pathledger="/home/chauncey/DataWith32Eu"
+output="/home/chauncey/filteraddresstx"
+addressfile="/home/chauncey/Result/addressDic1.json"
+addresslist=[]
+fouput=open(addressfile,"r")
+for line in fouput:
+    addresslist=json.loads(line)
+keys=addresslist.keys()
+
+files=os.listdir(pathledger)
+files.sort()
+for file in files:
+    fopen=open(pathledger+"/"+file,"r")
+    for line in fopen:
+        tx=json.loads(line)
+        filename=""
+        outputvalue = 0
+        bitcoinvalue = tx["value"]
+        add = tx["address"]
+        date=tx["date"][0:19]
+        dict= {}
+        dict[date]=bitcoinvalue
+        if add in keys:
+           filename = str(addresslist[add])
+           writeToJSONFile(output + "/" + filename + ".json", dict)
+
+
+
+
