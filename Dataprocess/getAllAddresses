@@ -1,0 +1,42 @@
+import os
+import json
+
+
+def writeToJSONFile(filePath, data):
+    with open(filePath, 'a') as fp:
+        json.dump(data, fp)
+        fp.write("\n")
+
+
+outputfile="/home/chauncey/Result/addressDic.json"
+addresslist=[]
+rootPath = "/home/chauncey/filterledger/"
+files=os.listdir(rootPath)
+for file in files:
+    fp=open(rootPath+file,"r")
+    for line in fp:
+       tx=json.loads(line)
+       addresslist.append(tx["address"])
+print(len(addresslist))
+dict = {}
+for key in addresslist:
+    dict[key] = dict.get(key,0) + 1
+print(len(dict))
+newlist=[]
+for key in dict:
+    n=dict[key]
+    if n>1500:
+       continue
+    if n <2:
+       continue
+    newlist.append(key)
+
+print(len(newlist))
+
+ind=0
+addressDict = {}
+for i in newlist:
+    addressDict[ind]= i
+    ind = ind + 1
+writeToJSONFile(outputfile, addressDict)
+
