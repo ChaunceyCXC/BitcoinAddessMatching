@@ -19,9 +19,7 @@ root   = "/home/chauncey/matchedaddressofvendor"
 vendors=os.listdir(root)
 sum=0
 half=0
-x=0
 for vendor in vendors:
-    x = x + 1
     files = os.listdir(root+"/"+vendor)
     addressdic={}
     n=0
@@ -42,10 +40,8 @@ for vendor in vendors:
             label[add]=1
 
     print(max/n)
-    print(x)
     if max/n>0.5:
         half=half+1
     sum=sum+max/n
 print(sum)
 print(half)
-print(x)
