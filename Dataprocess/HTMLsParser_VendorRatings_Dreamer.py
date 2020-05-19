@@ -12,7 +12,7 @@ if __name__ == '__main__':
     # This variable is used to store all comments
     aTableComments = []
     # Input directory
-    sInputDirectory = "/home/chauncey/data_dream/"
+    sInputDirectory = "/home/chauncey/data_WallStreet/"
     sInputDirectoryQuery = sInputDirectory + "contactMember?member=*&tab=ratings#tabChooser"
     aListOfAllHTMLFiles = glob.glob(sInputDirectoryQuery)
     for url in aListOfAllHTMLFiles:
