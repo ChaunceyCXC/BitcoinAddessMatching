@@ -121,7 +121,7 @@ for line in fp:
             ddiff = date2 - date1
             days, seconds = ddiff.days, ddiff.seconds
             hours = days * 24 + seconds / 3600
-            if hours > 0 and hours < 1 or hours > 12 and hours < 13:
+            if hours > 0 and hours < 1:
                 fp = open(path +"/"+ file, "r")
                 for line in fp:
                     tx = json.loads(line)
