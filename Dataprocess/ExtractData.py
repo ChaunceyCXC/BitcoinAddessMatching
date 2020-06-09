@@ -26,7 +26,7 @@ for file in files:
             le1=len(receivers)
             le2=len(senders)
             addresslist = []
-            if le1>10 and le2>10:
+            if le1>2 and le2>2:
               for receiver in receivers:
                   addresslist.append(receiver["address"])
             if "32Eup1TPADYTAa46wq48c7qmg7AuFwigeM" in addresslist:
