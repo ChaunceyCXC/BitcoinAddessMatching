@@ -10,7 +10,7 @@ def writeToJSONFile(filePath, data):
 
 
 #root   = "/home/chauncey/address/252"
-#output ="/home/chauncey/address/252bit3"
+#output ="/home/chauncey/address/252bit"
 
 root   = "/home/chauncey/matchedaddressofvendor"
 output ="/home/chauncey/avertical"
