@@ -4,7 +4,7 @@ import numpy as np
 import datetime
 
 
-root="/home/chauncey/address/252bit1"
+root="/home/chauncey/address/252bit"
 
 
 files=os.listdir(root)
