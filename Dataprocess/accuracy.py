@@ -6,7 +6,7 @@ import datetime
 
 #root="/home/chauncey/address/252"
 dictfile="/home/chauncey/Result/addressDic.json"
-folder="/home/chauncey/avertical4"
+folder="/home/chauncey/avertical"
 
 
 addressDic={}
